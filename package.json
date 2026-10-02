@@ -1,0 +1,19 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "discord bot",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc src/index.ts",
+    "start": "tsc src/index.ts && node ."
+  },
+  "dependencies": {
+    "dotenv": "^18.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
+  }
+}
