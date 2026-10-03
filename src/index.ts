@@ -1,3 +1,13 @@
-const text = "hello world"; 
+import { ExetendedClient } from "./structs/ExtendedClient";
 
-console.log(text);
+export * from "colors";
+
+const client = new ExetendedClient();
+
+client.Start();
+
+export { client }
+
+client.on("clientReady", () => {
+    console.log("Bot online".green)
+})
