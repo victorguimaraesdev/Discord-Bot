@@ -1,13 +1,24 @@
-import { ExetendedClient } from "./structs/ExtendedClient";
+import { Client, GatewayIntentBits } from "discord.js";
+import "dotenv/config";
 
-export * from "colors";
+const token = process.env.BOT_TOKEN;
 
-const client = new ExetendedClient();
+if (!token || typeof token !== 'string'){
+    throw new Error("Token não localizado ou invalido")
+}
 
-client.Start();
-
-export { client }
-
-client.on("clientReady", () => {
-    console.log("Bot online".green)
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ]  
 })
+
+
+client.once("clientReady", () => {
+    console.log(`O bot ${client.user?.tag} foi inicializado`)
+})
+
+
+client.login(token)
