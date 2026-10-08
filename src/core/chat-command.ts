@@ -1,9 +1,11 @@
 import { Events, type Client } from "discord.js";
 import { ChatCommand } from "../types/chat-command-type"
 import { ping } from "../service/ping"
+import { roll } from "../service/roll";
 
 export const chatCommands: ChatCommand[] = [
-      { name: "ping", execute: ping }
+      { name: "ping", execute: ping },
+      { name: "r", execute: roll }
 ]
 
 export const registerChatCommand = (client: Client, prefix: string): ChatCommand[] => {
