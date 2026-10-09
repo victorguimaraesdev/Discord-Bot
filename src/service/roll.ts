@@ -1,7 +1,7 @@
 import { ChatCommandContext } from "../types/chat-command-type";
 import { getRandom } from "../utils/random-number";
 
-const rollDices = (numberOfDices: number, facesOfDices: number) => {
+const rollDices = (numberOfDices: number, facesOfDices: number, modifier: number, args:string) => {
     const randomNumbers: Array<number> = [];
     let sumNumbers: number = 0
 
@@ -11,11 +11,13 @@ const rollDices = (numberOfDices: number, facesOfDices: number) => {
         sumNumbers += varRandomNumber
     }
 
-    let showResult = `${sumNumbers} <--- [`
+    sumNumbers += modifier
+
+    let showResult = `${sumNumbers} <-- [`
     for (let i = 0; i < randomNumbers.length; i++) {
         showResult += ` ${randomNumbers[i]} `
     }
-    showResult += `]`
+    showResult += `] ${args}`
 
     return showResult;
 }
@@ -24,18 +26,19 @@ export const roll = async ({ message, prefix, args }: ChatCommandContext): Promi
 
     if (!args[0]) return;
 
-    const result = args[0].match(/(\d+)#(\d+)d(\d+)/);
+    const result = args[0].match(/(\d+)#(\d+)d(\d+)\+(\d+)/);
 
-    if (!result || !result[1] || !result[2] || !result[3]) return;
+    if (!result || !result[1] || !result[2] || !result[3] || !result[4]) return;
 
     const numberOfRolls = Number(result[1])
     const numberOfDices = Number(result[2])
     const facesOfDices = Number(result[3])
+    const modifier = Number(result[4])
 
     let showResult = ""
 
    for(let i = 0; i < numberOfRolls; i++) {
-     showResult += `${rollDices(numberOfDices, facesOfDices)}\n`
+     showResult += `${rollDices(numberOfDices, facesOfDices, modifier, args[0])}\n`
    }
 
     await message.reply({
