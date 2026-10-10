@@ -13,7 +13,7 @@ const rollDices = (numberOfDices: number, facesOfDices: number, modifier: number
 
     sumNumbers += modifier
 
-    let showResult = `${sumNumbers} <-- [`
+    let showResult = `${sumNumbers} ←- [`
     for (let i = 0; i < randomNumbers.length; i++) {
         showResult += ` ${randomNumbers[i]} `
     }
