@@ -26,14 +26,14 @@ export const roll = async ({ message, prefix, args }: ChatCommandContext): Promi
 
     if (!args[0]) return;
 
-    const result = args[0].match(/(\d+)#(\d+)d(\d+)\+(\d+)/);
+    const result = args[0].match(/(\d+)?#?(\d+)?d(\d+)\+?(\d+)?/);
 
-    if (!result || !result[1] || !result[2] || !result[3] || !result[4]) return;
+    if (!result) return;
 
-    const numberOfRolls = Number(result[1])
-    const numberOfDices = Number(result[2])
+    const numberOfRolls = Number(result[1] ?? 1)
+    const numberOfDices = Number(result[2] ?? 1)
     const facesOfDices = Number(result[3])
-    const modifier = Number(result[4])
+    const modifier = Number(result[4] ?? 0)
 
     let showResult = ""
 
